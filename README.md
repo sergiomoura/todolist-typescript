@@ -1,6 +1,6 @@
 # ToDoList
 
-Um gerenciador de lista de a fazeres (to do list) para experimentar e exemplificar o uso de typescript na manipulação de DOM. Utilizei [Webpack](https://webpack.js.org/) para transpilação do código TS em um só pacote (index.js). 
+Um gerenciador de lista de a fazeres (to do list) para experimentar e exemplificar o uso de typescript na manipulação de DOM. Foi utilizado [Webpack](https://webpack.js.org/) para transpilação do código TS em um só pacote (index.js). 
 O array de itens é mantido como string no local storage do browser.
 
 ## Para fazer rodar em sua máquina
@@ -12,6 +12,8 @@ Entre na pasta do projeto
 
 Instale as dependências
 `npm install`
+
+Abra o arquivo /docs/index.html em um navegador.
 
 ## Fontes para estudos que basearam o projeto
 - [Documentação e Tutoriais de Typescript](https://www.typescriptlang.org/docs/home.html)
