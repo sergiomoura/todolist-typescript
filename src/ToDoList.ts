@@ -1,4 +1,5 @@
 import { Item } from "./Item";
+import { Prioridade } from "./Prioridade";
 
 const LOCAL_STORAGE_KEY: string = "todolist"
 
@@ -20,8 +21,17 @@ export class ToDoList {
 
 		// Associando eventos
 		this.form.addEventListener("submit", evt => {
+
+			// Previnindo comportamento padrão de envio de formulário
 			evt.preventDefault();
-			this.addItem(this.txtField.value);
+
+			// Verificando se existe um #n no início do texto
+			let text = this.txtField.value;
+			if (text.match(/^#(1|2|3)\s/)) {
+				this.addItem(text.slice(3), Number(text.slice(1, 2)));
+			} else {
+				this.addItem(text, 1);
+			}
 			this.txtField.value = "";
 			this.render();
 		})
@@ -95,9 +105,14 @@ export class ToDoList {
 		let tdActions = <HTMLTableCellElement>document.createElement('td');
 		tdActions.appendChild(btRemover);
 
+		// Criando célula de prioridade
+		let tdPrioridade = <HTMLTableCellElement>document.createElement('td');
+		tdPrioridade.innerHTML = `[${Prioridade[item.prioridade]}]`;
+
 		// Adicionando celulas à linha
 		tr.appendChild(tdCheck);
 		tr.appendChild(tdText);
+		tr.appendChild(tdPrioridade);
 		tr.appendChild(tdActions);
 
 		//retornando linha
@@ -110,12 +125,22 @@ export class ToDoList {
 		return item.done;
 	}
 
-	private addItem(texto: string): Item {
-		let item: Item = {
-			done: false,
-			text: texto
+	private addItem(texto: string, prioridade?: Prioridade): Item {
+		let item: Item;
+		if (prioridade) {
+			item = {
+				done: false,
+				text: texto,
+				prioridade
+			}
+		} else {
+			item = {
+				done: false,
+				text: texto
+			}
 		}
 		this.list.push(item);
+
 		this.saveList();
 		return item;
 	}

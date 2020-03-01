@@ -1,4 +1,6 @@
+import { Prioridade } from "Prioridade";
 export interface Item {
 	done: boolean,
-	text: string
+	text: string,
+	prioridade?: Prioridade
 }
